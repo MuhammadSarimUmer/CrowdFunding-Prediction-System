@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: crowdpredict
+  config:
+    # Local, git-ignored .env (KEY=value). OS env vars always win over this file.
+    import: optional:file:.env[.properties]
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:${DB_URI:postgresql://localhost:5432/crowdpredict}}
+    username: ${SPRING_DATASOURCE_USERNAME:crowdpredict}
+    password: ${SPRING_DATASOURCE_PASSWORD:crowdpredict}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:5}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 52MB
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:dev-only-secret-change-me-please-32-chars-min}
+    ttl-minutes: ${JWT_TTL_MINUTES:1440}
+  cors:
+    origins: ${CORS_ORIGINS:http://localhost:5173}
+  storage:
+    datasets: ${DATASET_STORAGE_PATH:./data/datasets}
+    models: ${MODEL_STORAGE_PATH:./data/models}
+    logs: ${LOG_STORAGE_PATH:./data/logs}
+  seed:
+    demo: ${SEED_DEMO_DATA:true}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html

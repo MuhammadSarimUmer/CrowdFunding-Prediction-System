@@ -1,0 +1,24 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Runtime data: uploaded datasets, trained models, prediction audit log, H2 files
+data/
+*.mv.db
+*.trace.db
+
+# Local config / secrets
+.env
+.env.local
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+
+# OS
+Thumbs.db
+.DS_Store

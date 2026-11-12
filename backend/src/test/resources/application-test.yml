@@ -1,0 +1,9 @@
+# Test profile: in-memory H2, never touches Neon.
+spring:
+  datasource:
+    url: jdbc:h2:mem:crowdpredict;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
